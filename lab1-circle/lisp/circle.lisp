@@ -17,10 +17,29 @@
 (defun circleChar (size i jj)
   (let
     ((j (truncate jj 2)))
-    (if (shouldPaint size i j) "*" " ")))
+    (if (shouldPaintRecursion size i j) "*" " ")))
 
 (defun shouldPaint (size i j)
   (shouldPaintS size i j))
+
+(defun shouldPaintHalf (size i j)
+  (or
+    (shouldPaintS size i j)
+    (shouldPaintS (/ size 2) i j)
+  )
+)
+
+(defun shouldPaintRecursion (s i j)
+  (if
+    (let
+      ((distance (abs (- (+ (* i i) (* j j)) (* s s)))))
+      (<= distance (+ 1 s)))
+    T
+    (if 
+      (> s 5)
+      (shouldPaintRecursion (- s 5) i j))
+  )
+)
 
 (defun shouldPaintS (s i j)
   (let
