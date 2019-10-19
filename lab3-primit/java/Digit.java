@@ -32,7 +32,7 @@ public class Digit
     public static void main(String[] args)
     {
         int n = getInteger();
-        if ( ?????????????????????? ) // TODO
+        if ( ((n >= 1) && (n < 10)) || (n == 0) ) // TODO
         {
             System.out.println("A");
         }
