@@ -36,6 +36,11 @@ data GamePos
         pos_turn :: Player,
         pos_value :: Float
       }
+      | GamePosWin
+      {
+        pos_board :: Board,
+        pos_turn :: Player
+      }
     deriving (Eq)
 
 instance (Show GamePos) where
@@ -44,6 +49,10 @@ instance (Show GamePos) where
         [show board, 
          "Player to take next move: " ++ show turn, 
          "Estimated advantage of player X against player O: " ++ show value]
+    show (GamePosWin board turn) =
+        unlines -- put the following strings on separate lines
+        [show board, 
+         "Player won: " ++ show turn]
 
 gamePos1 =
     GamePos board Player_X 0
@@ -63,7 +72,6 @@ gamePos1B =
              [O,B,X],
              [O,B,B]]
   
-{-
 gamePos2 = 
     GamePosWin board Player_X
         where
@@ -72,17 +80,16 @@ gamePos2 =
             [[X,X,O],
              [O,X,X],
              [O,O,X]]
--}
 
 main =
     do
---    putStr "equalBoards (gamePos1, gamePos1B) = "
---    putStrLn $ show $ equalBoards (gamePos1, gamePos1B)
+    putStr "equalBoards (gamePos1, gamePos1B) = "
+    putStrLn $ show $ equalBoards (gamePos1, gamePos1B)
     putStrLn "gamePos1 = "
     putStrLn $ show gamePos1
---    putStrLn "gamePos2 = "
---    putStrLn $ show gamePos2
+    putStrLn "gamePos2 = "
+    putStrLn $ show gamePos2
 
-equalBoards pos1 pos2 = -- Task 4.2.(b): fix this function
+equalBoards (pos1, pos2) = -- Task 4.2.(b): fix this function
     (pos_board pos1 == pos_board pos2)
 

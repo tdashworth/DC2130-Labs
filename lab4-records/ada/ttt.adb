@@ -50,43 +50,58 @@ procedure TTT is
     end Put_Board;
 
     -- start of code to focus on in Practical 4
+    
+    type GameVariant is (PROGESS, WON);
 
-    type GamePos is
+    type GamePos(pos_variant : GameVariant) is
         record
             board : TTTBoard;
-            turn : Player;
-            value : Float;
+            case pos_variant is
+                when PROGESS =>
+                    turn : Player;
+                    value : Float;
+                when WON =>
+                    winner : Player;
+            end case;
         end record;
 
     procedure Put_Pos(pos : GamePos) is
     begin
         Put_Board(pos.board);
-        Put("Player to make the next move: ");
-        Put(pos.turn);
-        Put_Line("");
-        Put("Estimated advantage of player X over player O is: ");
-        Put(pos.value, 0, 0, 0);
-        Put_Line("");
+        case pos.pos_variant is
+            when PROGESS =>
+                Put("Player to make the next move: ");
+                Put(pos.turn);
+                Put_Line("");
+                Put("Estimated advantage of player X over player O is: ");
+                Put(pos.value, 0, 0, 0);
+                Put_Line("");
+            when WON =>
+                Put("Player won: ");
+                Put(pos.turn);
+                Put_Line("");
+        end case;
     end Put_Pos;
 
     gamePos1 : GamePos
-        := (board =>
+        := (pos_variant => PROGESS, -- the discriminant
+            board =>
                 ((X, X, O),
                  (O, B, X),
                  (O, B, B)),
             turn => Player_X,
             value => 0.0);
 
---     gamePos2 : GamePos
---         := (pos_variant => WON, -- the discriminant
---             board =>
---                 ((X, X, O),
---                  (O, X, X),
---                  (O, O, X)),
---             winner => Player_X);
+    gamePos2 : GamePos
+        := (pos_variant => WON, -- the discriminant
+            board =>
+                ((X, X, O),
+                 (O, X, X),
+                 (O, O, X)),
+            winner => Player_X);
 
 begin
     Put_Pos(gamePos1);
     Put_Line("");
---     Put_Pos(gamePos2);
+    Put_Pos(gamePos2);
 end TTT;
