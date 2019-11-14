@@ -35,7 +35,7 @@ board2.changeCell("X",1,1) # both board1 and board2 change
 # a heterogeneous list:
 things = [111, board1, [1,2], board2, "a string"]
 
-boards = [] #TASK 5.3.(c) -- replace [] by a list comprehension
+boards = [thing for thing in things if (thing.__class__ == Board)] #TASK 5.3.(c) -- replace [] by a list comprehension
 
 for board in boards:
     print(board)
@@ -105,7 +105,8 @@ eventsNoPause = \
 
 # pick up players who were pausing
 pausingPlayers = \
-    [] # TASK 5.3.(b) -- replace [] by a list comprehension
+    [event.player for event in events if (event.__class__ == Pause)]
+    # TASK 5.3.(b) -- replace [] by a list comprehension
 
 print("Pausing players:", pausingPlayers)
 

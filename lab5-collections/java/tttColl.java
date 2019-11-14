@@ -192,7 +192,15 @@ public class tttColl
         // extract all players that pause from the events list
         List<Player> pausingPlayers = new ArrayList<Player>();
         // TASK 5.2.(b): make sure this variable has the value described in the comment
-
+        for (TTTEvent event : events)
+        {
+            if ( (event instanceof Pause))
+            {
+                pausingPlayers.add(((Pause)event).player);
+            }
+        }
+        
+        
         System.out.print("Pausing players: ");
         System.out.println(pausingPlayers);
     }
