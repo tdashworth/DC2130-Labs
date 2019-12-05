@@ -91,8 +91,8 @@ int countNodes(ArithExp * expr)
     if ( (*expr).repr == BINARYEXPR )
     {
         /* TASK 6.2(c) (Q5) */
-
-
+        result += countNodes((*expr).content.binExpr.subExprLeft);        
+        result += countNodes((*expr).content.binExpr.subExprRight);
     }
 
     return result;

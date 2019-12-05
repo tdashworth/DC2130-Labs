@@ -61,6 +61,10 @@ exp1 =
 -- exp2 = exp1 ^ exp1
 exp2 =
     ArithExpBinary BinaryPower exp1 exp1
+    
+-- exp3 = exp2 + exp1
+exp3 =
+    ArithExpBinary BinaryPlus exp2 exp1
 
 main =
     do
@@ -68,6 +72,8 @@ main =
     printExpInfo "exp1 all numbers incremented" (incrAllNumbers exp1)
     printExpInfo "exp2" exp2
     printExpInfo "exp2 all numbers incremented" (incrAllNumbers exp2)
+    printExpInfo "exp3" exp3
+
     where
     printExpInfo exprName expr =
         do
