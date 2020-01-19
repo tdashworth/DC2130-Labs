@@ -66,9 +66,9 @@ public class Balance
         public synchronized void balanceAB()
         {
             /* TASK 9.2.(c) - part 1 */
-
-
-
+            try {
+                this.wait();
+            } catch (InterruptedException e) {}
 
             if(a < b - 1)
             {
@@ -81,7 +81,7 @@ public class Balance
 
             print();
             /* TASK 9.2.(c) - part 2 */
-
+            this.notifyAll();
 
         }
 
@@ -91,9 +91,9 @@ public class Balance
         public synchronized void balanceBC()
         {
             /* TASK 9.2.(c) - part 1 */
-
-
-
+            try {
+                this.wait();
+            } catch (InterruptedException e) {}
 
             if(b < c - 1)
             {
@@ -106,7 +106,7 @@ public class Balance
 
             print();
             /* TASK 9.2.(c) - part 2 */
-
+            this.notifyAll();
         }
 
         /**
@@ -115,9 +115,9 @@ public class Balance
         public synchronized void balanceCD()
         {
             /* TASK 9.2.(c) - part 1 */
-
-
-
+            try {
+                this.wait();
+            } catch (InterruptedException e) {}
 
             if(c < d - 1)
             {
@@ -130,7 +130,7 @@ public class Balance
 
             print();
             /* TASK 9.2.(c) - part 2 */
-
+            this.notifyAll();
         }
 
         /* 
@@ -201,9 +201,9 @@ public class Balance
     {
         // start the balance threads:
         /* TASK 9.2.(b) */
-
-
-
+        new Thread(new BalanceAB()).start();
+        new Thread(new BalanceBC()).start();
+        new Thread(new BalanceCD()).start();
 
         // set a task to the balancer:
         System.out.println("Starting");

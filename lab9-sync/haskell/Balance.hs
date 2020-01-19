@@ -10,9 +10,9 @@ main =
     stateTV <- atomically $ newTVar initState
     -- create and start some threads:
     -- *** TASK 9.2.(d) ***
-
-
-    
+    forkIO (keepBalancingAB stateTV)
+    forkIO (keepBalancingBC stateTV)
+    forkIO (keepBalancingCD stateTV)
     -- give the state a balancing task:
     putStrLn "Starting"
     setAll stateTV 5 1 3 10
@@ -130,8 +130,9 @@ waitUntilAllBalanced stateTV =
         let (State a b c d printing) = state
         -- check whether balanced and block if not yet:
         -- *** TASK 9.2.(e) ***
-
-
+        if (balanced a b) && (balanced b c) && (balanced c d)
+            then return ()
+            else retry
 
 
 balanced i j = abs (j - i) <= 1
