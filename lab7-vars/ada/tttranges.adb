@@ -21,8 +21,8 @@ procedure tttRanges is
         end case;
     end Format_Cell_Value;
 
-    subtype Row_Num_T is Integer range 1..3;
-    subtype Col_Num_T is Integer range 1..3;
+    type Row_Num_T is new Integer range 1..3;
+    type Col_Num_T is new Integer range 1..3;
 
     type Row_T is
         array (Col_Num_T) of Cell_Value_T;
@@ -67,14 +67,14 @@ procedure tttRanges is
         for row_n in Row_Num_T loop
             for col_n in Col_Num_T loop
                 -- swap the contents of board at row_n, col_n with the contents at col_n, row_n
-                if ( row_n < col_n ) then
+                if ( Integer(row_n) < Integer(col_n) ) then
                      -- this condition ensures that we do not swap the same pair twice
                     declare 
                         -- in Ada, one cannot declare new variables
                         -- except in special blocks such as this one
                         temp : Cell_Value_T; -- needed to perform a swap
-                        flipped_row_n : Row_Num_T := col_n;
-                        flipped_col_n : Col_Num_T := row_n;
+                        flipped_row_n : Row_Num_T := Row_Num_T(col_n);
+                        flipped_col_n : Col_Num_T := Col_Num_T(row_n);
                     begin
                         temp := board(flipped_row_n)(flipped_col_n);
                         board(flipped_row_n)(flipped_col_n) := board(row_n)(col_n);
