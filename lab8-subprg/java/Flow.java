@@ -40,6 +40,19 @@ public class Flow
         f1 = 0; f2 = 0; f3 = 1;
         
         System.out.println(formatF1F2F3(f1,f2,f3));
+        FlowPair pair1 = new FlowPair(f1, f2);
+        pair1.adjustDistribution();
+        f1 = pair1.a; f2 = pair1.b;
+        System.out.println(formatF1F2F3(f1,f2,f3));
+        FlowPair pair2 = new FlowPair(f2, f3);
+        pair2.adjustDistribution();
+        f2 = pair2.a; f3 = pair2.b;
+        System.out.println(formatF1F2F3(f1,f2,f3));
+        FlowPair pair3 = new FlowPair(f2, f2);
+        pair3.adjustDistribution();
+        f2 = pair3.a; 
+        //f2 = pair3.b;
+        System.out.println(formatF1F2F3(f1,f2,f3));
         
         // 8.3.(c) TASK:
         //    Write code that is analogous to

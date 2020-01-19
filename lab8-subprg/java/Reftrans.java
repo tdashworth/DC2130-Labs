@@ -23,7 +23,7 @@ public class Reftrans
         initialiseList(list);
 
         int result1 =
-            list.remove(1) + list.remove(2); // not referentially transparent
+            list.get(1) + list.get(2); list.remove(1); list.remove(2);// not referentially transparent
         // TASK 8.2 (a): rewrite the above 2 lines using referentially transparent expressions
 
         // create exactly the same lists as before:
@@ -31,7 +31,7 @@ public class Reftrans
         initialiseList(list);
 
         int result2 =
-            list.remove(2) + list.remove(1); // not referentially transparent
+            list.get(2) + list.get(1); list.remove(2); list.remove(1);// not referentially transparent
         // TASK 8.2 (a): rewrite the above 2 lines using referentially transparent expressions
 
         System.out.println("result1 = " + result1);
